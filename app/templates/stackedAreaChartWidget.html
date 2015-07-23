@@ -1,0 +1,14 @@
+<div ng-controller="StackedAreaWidgetCtrl">
+	<nvd3-stacked-area-chart
+    	data="stackedAreaChartData"
+			xAxisTickFormat="xAxisTickFormatFunction()"
+        showXAxis="true"
+        showYAxis="true"
+        height={{height}}
+        tooltips="true"
+        useInteractiveGuideline="true"
+        showLegend="true"
+				showControls="true">
+        	<svg></svg>
+    </nvd3-stacked-area-chart>
+</div>

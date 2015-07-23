@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-sm-9">
+    <h1><a href="#/"><span ng-controller="ProjectNameCtrl">{{projectName.owner}} {{projectName.repository}}</span></a> / <small>Source code activity</small></h1>
+  </div>
+  <div class="col-sm-3 text-right" ng-controller="SharingCtrl">
+    <span>Share: <button ng-click="shareOnTwitter()" class="btn btn-xs btn-primary"><i class="fa fa-twitter"></i> Twitter</button>
+      <button ng-click="shareOnUrl()" class="btn btn-xs btn-success"><i class="fa fa-share"></i> Url</button><span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 col-md-12">
+    <h2>General Activity</h2>
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <h3>Commits</h3>
+        <vgwidget-lines widget-datasource="scm-evolutionary" widget-metrics="commits"></vgwidget-lines>
+        <vgwidget-trends widget-datasource="scm-static" widget-metrics="commits"></vgwidget-trends>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <h3>Files</h3>
+        <vgwidget-lines widget-datasource="scm-evolutionary" widget-metrics="files"></vgwidget-lines>
+        <vgwidget-trends widget-datasource="scm-static" widget-metrics="files"></vgwidget-trends>
+      </div>
+      <div class="col-md-12">
+        <h3>Edited lines of code</h3>
+        <vgwidget-lines widget-datasource="scm-evolutionary" widget-metrics="added_lines,removed_lines"></vgwidget-lines>
+        <vgwidget-trends widget-datasource="scm-static" widget-metrics="added_lines"></vgwidget-trends>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-12">
+    <h2>Community</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <h3>Authors &amp; new authors</h3>
+          <vgwidget-lines widget-datasource="scm-evolutionary" widget-metrics="authors,newauthors"></vgwidget-lines>
+          <vgwidget-trends widget-datasource="scm-static" widget-metrics="authors,newauthors"></vgwidget-trends>
+        </div>
+        <div class="row">
+          <h3>Demography</h3>
+          <vgwidget-demography widget-datasource="scm"></vgwidget-demography>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <h3>Top code authors</h3>
+          <vgwidget-tops widget-datasource="scm-top" widget-metrics="authors,commits"></vgwidget-tops>
+        </div>
+        <div class="row">
+          <h3>Domains</h3>
+          <vgwdiget-horizbars widget-datasource="scm-domains" widget-metrics="commits,authors"></vgwdiget-horizbars>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <h2>Activity by domains</h2>
+  <div class="row">
+    <div class="col-lg-5 col-lg-offset-1 col-md-10 col-md-offset-1">
+      <h3>Activity by domain evolution</h3>
+      <vgwdiget-stackedarea widget-datasource="scm-domains" widget-metrics="commits"></vgwdiget-stackedarea>
+    </div>
+    <div class="col-lg-5 col-md-10 col-md-offset-1">
+      <h3>Authors by domain evolution</h3>
+      <vgwdiget-stackedarea widget-datasource="scm-domains" widget-metrics="authors"></vgwdiget-stackedarea>
+    </div>
+  </div>
+</div>

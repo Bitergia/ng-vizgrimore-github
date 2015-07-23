@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-9">
+    <h1><a href="#/"><span ng-controller="ProjectNameCtrl">{{projectName.owner}} {{projectName.repository}}</span></a> / <small>Issues management activity</small></h1>
+  </div>
+  <div class="col-sm-3 text-right" ng-controller="SharingCtrl">
+    <span>Share: <button ng-click="shareOnTwitter()" class="btn btn-xs btn-primary"><i class="fa fa-twitter"></i> Twitter</button>
+      <button ng-click="shareOnUrl()" class="btn btn-xs btn-success"><i class="fa fa-share"></i> Url</button><span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 col-md-12">
+    <h2>General Activity</h2>
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <vgwidget-lines widget-datasource="its-evolutionary" widget-metrics="opened,closed"></vgwidget-lines>
+        <vgwidget-trends widget-datasource="its-static" widget-metrics="opened,closed"></vgwidget-trends>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <vgwidget-lines widget-datasource="its-evolutionary" widget-metrics="bmitickets"></vgwidget-lines>
+        <vgwidget-trends widget-datasource="its-static" widget-metrics="bmitickets"></vgwidget-trends>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-12">
+    <h2>Community</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <vgwidget-lines widget-datasource="its-evolutionary" widget-metrics="openers,closers"></vgwidget-lines>
+          <vgwidget-trends widget-datasource="its-static" widget-metrics="openers,closers"></vgwidget-trends>
+        </div>
+        <div class="row">
+          <h3>Demography</h3>
+          <vgwidget-demography widget-datasource="its"></vgwidget-demography>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <vgwidget-tops widget-datasource="its-top" widget-metrics="openers,opened"></vgwidget-tops>
+        </div>
+        <div class="row">
+          <vgwidget-tops widget-datasource="its-top" widget-metrics="closers,closed"></vgwidget-tops>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,10 @@ $ npm install
 $ bower install
 ```
 
-Dashboard renders data produced by current standard [MetricsGrimoire](http://metricsgrimoire.github.io) toolkit applied to one GitHub repository. Data (set of json files) must be copied under `data` folder in root directory
+Dashboard renders data produced by current standard [MetricsGrimoire](http://metricsgrimoire.github.io) toolkit applied to one GitHub repository. Data (set of json files) must be copied under `data` folder in root directory.
+
+*Note:*
+> Currently, there is a set of data included for testing purposes.
 
 Once there, just:
 

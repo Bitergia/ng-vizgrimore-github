@@ -11,7 +11,7 @@
 
 var vizgrimoireDirectives = angular.module('vizgrimoireDirectives', []);
 
-vizgrimoireDirectives.directive('vgwidgetLines', function () {
+vizgrimoireDirectives.directive('vgwidgetTimeseries', function () {
     return {
         restrict: 'E',
         templateUrl: 'templates/linesChartWidget.html',

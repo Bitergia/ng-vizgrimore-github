@@ -41,3 +41,36 @@ $ grunt dist
 ```
 
 FIXME: `data` folder (by now) needs to be copied to `dist` folder to ensure data is shown
+
+`dist` folder content could be uploaded to any web server to be available for browsing through internet
+
+#How it works
+
+##VizGrimoire Widgets (AKA _vgwidets_)
+
+Main component for the dashboard are widgets used to represent data. They are defined as Angular directives in the html code:
+
+```<vgwidet-{type} datasource={datasource} metrics={metric1,metric2,etc}></vgwidet>```
+
+Basically, you define:
+
+* *vgwidget-{type}*: the type of visualization to be used to represent the data:
+  * *vgwidget-timeseries*: used for timeseries representation
+  * *vgwidget-trends*: used for data trends representation
+  * *vgwidget-onion*: used for _onion analysis_ representation
+  * *vgwidget-tops*: used for top contributors representation
+  * *vgwidget-demography*: used for demographic representation
+  * *vgwidget-stackedarea*: used for aggregated set of timeseries visualization (like _acivity by domains_, _activity by companies_, etc.) (_under development_)
+* *datasource*: to define where the data to show come from:
+ * *scm*: Source code management (data related with commits and committers)
+ * *its*: Issue tracking system (data related with issues and issue openers and closers)
+ * *scr*: Source code review (data related with pull requests and submitters, reviewers and mergers)
+* *metrics*: a list of metrics to be shown (like _commits_, _domains_, _authors_, etc.).
+
+VGWidgets are placed as blocks in the html structure, and the will fit the available width. Usually vgwidet height is hardcoded fixed.
+
+###Some examples
+
+To show a chart of source code authors evolution, current implementation is:
+
+```<vgwidet-timeseries datasource="scm" metrics="authors"></vgwidet>```

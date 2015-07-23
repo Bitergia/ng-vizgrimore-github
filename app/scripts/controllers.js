@@ -36,7 +36,7 @@ vizgrimoireControllers.controller('SharingCtrl', ['$scope', function($scope) {
 
 vizgrimoireControllers.controller('LinesChartCtrl', ['$scope', '$http', function ($scope, $http){
 
-    $http.get('data/'+$scope.datasource+'.json').success(function(data){
+    $http.get('data/'+$scope.datasource+'-evolutionary.json').success(function(data){
 
         var metricsArray = $scope.metrics.split(',');
 
@@ -69,7 +69,7 @@ vizgrimoireControllers.controller('LinesChartCtrl', ['$scope', '$http', function
 }]);
 
 vizgrimoireControllers.controller('MetricsTrendsCtrl', ['$scope', '$http', function ($scope, $http){
-  $http.get('data/'+$scope.datasource+'.json').success(function(data){
+  $http.get('data/'+$scope.datasource+'-static.json').success(function(data){
     var metricsArray = $scope.metrics.split(',');
 
     var dataTemp = [];
@@ -98,7 +98,7 @@ vizgrimoireControllers.controller('MetricsTrendsCtrl', ['$scope', '$http', funct
 }]);
 
 vizgrimoireControllers.controller('OnionWidgetCtrl', ['$scope', '$http', function($scope, $http){
-  $http.get('data/'+$scope.datasource+'.json').success(function(data){
+  $http.get('data/'+$scope.datasource+'-static.json').success(function(data){
     var metricsArray = $scope.metrics.split(',');
 
     var dataTemp = [];
@@ -119,7 +119,7 @@ vizgrimoireControllers.controller('OnionWidgetCtrl', ['$scope', '$http', functio
 }]);
 
 vizgrimoireControllers.controller('TopsWidgetCtrl', ['$scope', '$http', function($scope, $http){
-  $http.get('data/'+$scope.datasource+'.json').success(function (data){
+  $http.get('data/'+$scope.datasource+'-top.json').success(function (data){
     var metricsArray = $scope.metrics.split(',');
 
     var contributorsName = metricsArray[0];

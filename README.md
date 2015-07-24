@@ -61,11 +61,11 @@ Basically, you define:
   * *vgwidget-tops*: used for top contributors representation
   * *vgwidget-demography*: used for demographic representation
   * *vgwidget-stackedarea*: used for aggregated set of timeseries visualization (like _acivity by domains_, _activity by companies_, etc.) (_under development_)
-* *datasource*: to define where the data to show come from:
+* *widget-datasource*: to define where the data to show come from:
  * *scm*: Source code management (data related with commits and committers)
  * *its*: Issue tracking system (data related with issues and issue openers and closers)
  * *scr*: Source code review (data related with pull requests and submitters, reviewers and mergers)
-* *metrics*: a list of metrics to be shown (like _commits_, _domains_, _authors_, etc.).
+* *widget-metrics*: a list of metrics to be shown (like _commits_, _domains_, _authors_, etc.).
 
 VGWidgets are placed as blocks in the html structure, and the will fit the available width. Usually vgwidet height is hardcoded fixed.
 
@@ -73,4 +73,12 @@ VGWidgets are placed as blocks in the html structure, and the will fit the avail
 
 To show a chart of source code authors evolution, current implementation is:
 
-```<vgwidet-timeseries datasource="scm" metrics="authors"></vgwidet>```
+```<vgwidet-timeseries widget-datasource="scm" widget-metrics="authors"></vgwidet>```
+
+If you would like to see both authors and new authors, that would be:
+
+```<vgwidet-timeseries widget-datasource="scm" widget-metrics="authors,newauthors"></vgwidet>```
+
+#TODO
+
+There are a lot of things to do and that could be improved, so, test it, paly with it and submit pull requests if you find it interesting...

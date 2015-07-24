@@ -30,7 +30,7 @@ app.config(['$routeProvider', function($routeProvider){
       templateUrl: 'templates/scrOverview.html'
     }
   ).otherwise({
-    redirectTo: '/'
+    templateUrl: 'templates/404.html'
   });
 }]);
 

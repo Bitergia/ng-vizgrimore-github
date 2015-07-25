@@ -15,7 +15,7 @@ Currently the dashboard depends mainly on:
 
 If you want use it as standalone dashboard, clone the repository and:
 
-```
+```bash
 $ npm install
 
 $ bower install
@@ -28,7 +28,7 @@ Dashboard renders data produced by current standard [MetricsGrimoire](http://met
 
 Once there, just:
 
-```
+```bash
 $ grunt serve
 ```
 
@@ -36,7 +36,7 @@ This will let you test and develop over your own dashboard version.
 
 If you want to create a _distributable_ dashboard:
 
-```
+```bash
 $ grunt dist
 ```
 
@@ -50,7 +50,9 @@ FIXME: `data` folder (by now) needs to be copied to `dist` folder to ensure data
 
 Main component for the dashboard are widgets used to represent data. They are defined as Angular directives in the html code:
 
-```<vgwidet-{type} datasource={datasource} metrics={metric1,metric2,etc}></vgwidet>```
+```html
+<vgwidet-{type} datasource={datasource} metrics={metric1,metric2,etc}></vgwidet>
+```
 
 Basically, you define:
 
@@ -73,11 +75,15 @@ VGWidgets are placed as blocks in the html structure, and the will fit the avail
 
 To show a chart of source code authors evolution, current implementation is:
 
-```<vgwidet-timeseries widget-datasource="scm" widget-metrics="authors"></vgwidet>```
+```html
+<vgwidet-timeseries widget-datasource="scm" widget-metrics="authors"></vgwidet>
+```
 
 If you would like to see both authors and new authors, that would be:
 
-```<vgwidet-timeseries widget-datasource="scm" widget-metrics="authors,newauthors"></vgwidet>```
+```html
+<vgwidet-timeseries widget-datasource="scm" widget-metrics="authors,newauthors"></vgwidet>
+```
 
 #TODO
 

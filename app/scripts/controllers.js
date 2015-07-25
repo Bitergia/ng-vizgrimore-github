@@ -60,8 +60,7 @@ vizgrimoireControllers.controller('LinesChartCtrl', ['$scope', '$http', function
 
         $scope.toolTipContentFunction = function(){
           return function(key, x, y, e, graph) {
-            return '<p>' + key + '</p>' +
-            '<p><small><strong>' +  y + '</strong> at ' + x + '</small></p>';
+            return '<small><strong>' +  y + '</strong> '+key+' on ' + x + '</small>';
           };
         };
     });
@@ -80,13 +79,13 @@ vizgrimoireControllers.controller('MetricsTrendsCtrl', ['$scope', '$http', funct
         total: data[metricsArray[i]],
         diff365: data['diff_net'+metricsArray[i]+'_365'],
         percentage365: data['percentage_'+metricsArray[i]+'_365'],
-        color365: function(x){if (x >>> 0 === parseFloat(x)){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_365']),
+        color365: function(x){if (x > 0){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_365']),
         diff30: data['diff_net'+metricsArray[i]+'_30'],
         percentage30: data['percentage_'+metricsArray[i]+'_30'],
-        color30: function(x){if (x >>> 0 === parseFloat(x)){return 'green';}else{return 'red';}}(data['percentage_'+metricsArray[i]+'_30']),
+        color30: function(x){if (x > 0){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_30']),
         diff7: data['diff_net'+metricsArray[i]+'_7'],
         percentage7: data['percentage_'+metricsArray[i]+'_7'],
-        color7: function(x){if (x >>> 0 === parseFloat(x)){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_7']),
+        color7: function(x){if (x > 0){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_7']),
         });
     }
 

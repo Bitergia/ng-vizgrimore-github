@@ -37,7 +37,7 @@ This will let you test and develop over your own dashboard version.
 If you want to create a _distributable_ dashboard:
 
 ```bash
-$ grunt dist
+$ grunt build
 ```
 
 FIXME: `data` folder (by now) needs to be copied to `dist` folder to ensure data is shown

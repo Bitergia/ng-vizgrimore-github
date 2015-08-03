@@ -248,7 +248,7 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
   });
 }]);
 
-vizgrimoireControllers.controller('DemographyChart',['$scope', '$http', '$q', function($scope, $http, $q){
+vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q', function($scope, $http, $q){
 
   var birthsRequest = $http.get('data/'+$scope.datasource+'-demographics-birth.json');
   var agingRequest = $http.get('data/'+$scope.datasource+'-demographics-aging.json');

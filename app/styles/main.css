@@ -40,7 +40,9 @@ h4, h5, h6 {
 }
 
 .navbar-inverse {
-  background-color: #f90;
+  background-color: #ff8c00;
+  text-shadow: 0 0 1px #111;
+  border-color: #f90;
 }
 
 .navbar-inverse * {
@@ -49,22 +51,22 @@ h4, h5, h6 {
 
 .navbar-nav > li > a {
   color: #fff;
-  background-color: #f90;
+  background-color: #ff8c00;
 }
-/*
-.navbar-nav > .open > a:focus, .navbar-nav > .open > a:hover {
-  background-color: #f70;
+
+.navbar-nav > li > a:focus, .navbar-nav > li > a:hover {
+  background-color: #f90!important;
 }
-*/
+
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-  background-color: #f70;
+  background-color: #ff8c00;
 }
 .navbar-nav .dropdown-menu {
-  background-color: #f70;
+  background-color: #ff8c00;
 }
 
 .navbar-nav .dropdown-menu a:hover, .navbar-nav .dropdown-menu a:focus {
-  background-color: #f60;
+  background-color: #ff8c00;
 }
 
 .onion {

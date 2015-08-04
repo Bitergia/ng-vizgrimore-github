@@ -8,8 +8,10 @@ to be used in [biterg.io](http://biterg.io) website.
 Currently the dashboard depends mainly on:
 
 * [Angular JS](https://angularjs.org/) (_1.4.x_), including _angular-route_ and _angular-bootstrap_ modules
-* [Angular NVD3 directives](https://cmaurer.github.io/angularjs-nvd3-directives/)
+* [Angular nvD3](http://krispo.github.io/angular-nvd3/#/)
 * _bootstrap-css-only_ for baseline styling
+
+Check [bower.json](https://github.com/Bitergia/ng-vizgrimore-github/blob/master/bower.json) file for detailed info.
 
 #How to install it
 
@@ -62,7 +64,7 @@ Basically, you define:
   * *vgwidget-onion*: used for _onion analysis_ representation
   * *vgwidget-tops*: used for top contributors representation
   * *vgwidget-demography*: used for demographic representation
-  * *vgwidget-stackedarea*: used for aggregated set of timeseries visualization (like _acivity by domains_, _activity by companies_, etc.) (_under development_)
+  * *vgwidget-stackedarea*: used for aggregated set of timeseries visualization, like _activity by domains_. _Activity by companies_, or _by repositories_, etc. are still _under development_ or _pending features_.
 * *widget-datasource*: to define where the data to show come from:
  * *scm*: Source code management (data related with commits and committers)
  * *its*: Issue tracking system (data related with issues and issue openers and closers)

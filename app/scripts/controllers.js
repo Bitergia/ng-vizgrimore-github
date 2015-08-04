@@ -26,7 +26,7 @@ vizgrimoireControllers.controller('ProjectNameCtrl', ['$scope', '$http', functio
 vizgrimoireControllers.controller('SharingCtrl', ['$scope', function($scope) {
 
   $scope.shareOnTwitter = function() {
-    window.location.href = 'https://twitter.com/share?url='+encodeURIComponent(document.URL)+'&text='+document.title+'&hashtags=dev,metrics&via=biterg_cauldron';
+    window.location.href = 'https://twitter.com/share?url='+encodeURIComponent(document.URL)+'&text=Check '+document.title+'&hashtags=dev,metrics&via=biterg_cauldron';
   };
 
   $scope.shareOnUrl = function() {
@@ -34,36 +34,53 @@ vizgrimoireControllers.controller('SharingCtrl', ['$scope', function($scope) {
   };
 }]);
 
-vizgrimoireControllers.controller('LinesChartCtrl', ['$scope', '$http', function ($scope, $http){
+vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', function ($scope, $http){
 
-    $http.get('data/'+$scope.datasource+'-evolutionary.json').success(function(data){
-
-        var metricsArray = $scope.metrics.split(',');
-
-        var dataTemp = [];
-
-        for (var i = 0; i < metricsArray.length; i++ ){
-          var values = [];
-          for (var j = 0; j < data.unixtime.length; j++) {
-            values.push([data.unixtime[j], data[metricsArray[i]][j]]);
-          }
-          dataTemp.push({key: metricsArray[i], values: values});
-        }
-
-        $scope.linesChartData = dataTemp;
-
-        $scope.xAxisTickFormatFunction = function(){
-          return function(d){
+  $scope.options = {
+    chart: {
+      type: 'lineWithFocusChart',
+      height: 325,
+      height2: 40,
+      xAxis: {
+        tickFormat: function(d){
             return d3.time.format('%e-%b-%Y')(new Date(d*1000));
-          };
-        };
+        }
+      },
+      x2Axis: {
+        tickFormat: function(d){
+            return d3.time.format('%e-%b-%Y')(new Date(d*1000));
+        }
+      },
+      yAxis: {
+        tickFormat: function(d) {
+          return d3.format(',.0f')(d);
+        }
+      },
+      y2Axis: {
+        tickFormat: function(d) {
+          return d3.format(',.0f')(d);
+        }
+      },
+      forceY: [0],
+      useInteractiveGuideline: true
+    }
+  };
 
-        $scope.toolTipContentFunction = function(){
-          return function(key, x, y, e, graph) {
-            return '<small><strong>' +  y + '</strong> '+key+' on ' + x + '</small>';
-          };
-        };
-    });
+  $http.get('data/'+$scope.datasource+'-evolutionary.json').success(function(data){
+    var metricsArray = $scope.metrics.split(',');
+    var dataTemp = [];
+
+    for (var i = 0; i < metricsArray.length; i++ ){
+      var values = [];
+      for (var j = 0; j < data.unixtime.length; j++) {
+        values.push({x: data.unixtime[j], y: data[metricsArray[i]][j]});
+      }
+      dataTemp.push({key: metricsArray[i], values: values});
+    }
+
+    $scope.timeseriesData = dataTemp;
+
+  });
 
 }]);
 
@@ -169,6 +186,22 @@ vizgrimoireControllers.controller('TopsWidgetCtrl', ['$scope', '$http', function
 }]);
 
 vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', function($scope, $http) {
+
+  $scope.options = {
+    chart: {
+      type: 'multiBarHorizontalChart',
+      showControls: false,
+      x: function(d){return d.label;},
+      y: function(d){return d.value;},
+      margin: {left: 120},
+      yAxis: {
+        tickFormat: function(d){
+            return d3.format(',.0f')(d);
+        }
+      }
+    }
+  };
+
   $http.get('data/'+$scope.datasource+'.json').success(function(data){
 
     var metricsArray = $scope.metrics.split(',');
@@ -178,7 +211,7 @@ vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', 
       var valuesTemp = [];
       for (var j = 0; j < data[metricsArray[i]+'_365'].length; j++){
         valuesTemp.push(
-          [data.name[j], data[metricsArray[i]+'_365'][j]]
+          {label: data.name[j], value: data[metricsArray[i]+'_365'][j]}
         );
       }
       tempData.push(
@@ -187,21 +220,39 @@ vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', 
     }
 
     if (tempData[0].values.length > 10) {
-      $scope.height = 600;
+      $scope.options.chart.height = 600;
     } else {
-      $scope.height =320;
+      $scope.options.chart.height =320;
     };
 
     $scope.horizBarsChartData = tempData;
-
-    $scope.$on('elementClick.directive', function(angularEvent, event){
-      console.log(event);
-    });
 
   });
 }]);
 
 vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '$q', function($scope, $http, $q) {
+
+  $scope.options = {
+    chart: {
+      type: 'stackedAreaChart',
+      x: function(d){return d[0];},
+      y: function(d){return d[1];},
+      useVoronoi: true,
+      clipEdge: true,
+      useInteractiveGuideline: true,
+      xAxis: {
+        showMaxMin: false,
+        tickFormat: function(d){
+            return d3.time.format('%e-%b-%Y')(new Date(d*1000));
+        }
+      },
+      yAxis: {
+        tickFormat: function(d){
+          return d3.format(',.0f')(d);
+        }
+      }
+    }
+  };
 
   $http.get('data/'+$scope.datasource+'.json').success(function(data){
     var metric = $scope.metrics;
@@ -217,9 +268,9 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
     }
 
     if (data.name.length > 10) {
-      $scope.height = 600;
+      $scope.options.chart.height = 600;
     } else {
-      $scope.height = 320;
+      $scope.options.chart.height = 320;
     };
 
     $q.all(jsonRequests).then(function(results){
@@ -236,19 +287,23 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
         });
       }
 
-      $scope.stackedAreaChartData = tempData;
+      $scope.stackedData = tempData;
     });
-
-    $scope.xAxisTickFormatFunction = function(){
-      return function(d){
-        return d3.time.format('%e-%b-%Y')(new Date(d*1000));
-      };
-    };
 
   });
 }]);
 
 vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q', function($scope, $http, $q){
+
+  $scope.options = {
+    chart: {
+      type: 'multiBarHorizontalChart',
+      height: 320,
+      showControls: false,
+      x: function(d){return d.label;},
+      y: function(d){return d.value;},
+    }
+  };
 
   var birthsRequest = $http.get('data/'+$scope.datasource+'-demographics-birth.json');
   var agingRequest = $http.get('data/'+$scope.datasource+'-demographics-aging.json');
@@ -266,7 +321,7 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
       var series = [];
 
       for (var i = periods - 1; i >= 0; i--) {
-        series.push([(i*6)/12+'y',0]);
+        series.push({label: (i*6)/12+'y',value: 0});
       };
 
       return series;
@@ -277,7 +332,7 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
     for (var i = 0; i < births.length; i++) {
       var birthPeriod = Math.floor(births[i] / (30*6));
       var seriesIndex = birthSeries.length - birthPeriod - 1;
-      birthSeries[seriesIndex][1] = birthSeries[seriesIndex][1] + 1;
+      birthSeries[seriesIndex].value = birthSeries[seriesIndex].value + 1;
     };
 
     var ageSeries = series(periods);
@@ -285,7 +340,7 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
     for (var i = 0; i < aages.length; i++) {
       var agePeriod = Math.floor(aages[i] / (30*6));
       var seriesIndex = ageSeries.length - agePeriod - 1;
-      ageSeries[seriesIndex][1] = ageSeries[seriesIndex][1] + 1;
+      ageSeries[seriesIndex].value = ageSeries[seriesIndex].value + 1;
     };
 
     //console.log('b :'+ birthSeries);
@@ -302,7 +357,7 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
       }
     ];
 
-    $scope.demographyChartData = dataTemp;
+    $scope.demographicData = dataTemp;
 
   });
 

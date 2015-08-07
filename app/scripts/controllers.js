@@ -36,6 +36,10 @@ vizgrimoireControllers.controller('SharingCtrl', ['$scope', function($scope) {
 
 vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', function ($scope, $http){
 
+  $scope.loader = {
+    loading: true
+  };
+
   $scope.options = {
     chart: {
       type: 'lineWithFocusChart',
@@ -78,6 +82,8 @@ vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', function
       dataTemp.push({key: metricsArray[i], values: values});
     }
 
+    $scope.loader.loading = false;
+
     $scope.timeseriesData = dataTemp;
 
   });
@@ -114,6 +120,11 @@ vizgrimoireControllers.controller('MetricsTrendsCtrl', ['$scope', '$http', funct
 }]);
 
 vizgrimoireControllers.controller('OnionWidgetCtrl', ['$scope', '$http', function($scope, $http){
+
+  $scope.loader = {
+    loading: true
+  };
+
   $http.get('data/'+$scope.datasource+'-static.json').success(function(data){
     var metricsArray = $scope.metrics.split(',');
 
@@ -129,12 +140,18 @@ vizgrimoireControllers.controller('OnionWidgetCtrl', ['$scope', '$http', functio
       });
     }
 
+    $scope.loader.loading = false;
+
     $scope.onions = dataTemp;
 
   });
 }]);
 
 vizgrimoireControllers.controller('TopsWidgetCtrl', ['$scope', '$http', function($scope, $http){
+  $scope.loader = {
+    loading: true
+  };
+
   $http.get('data/'+$scope.datasource+'-top.json').success(function (data){
     var metricsArray = $scope.metrics.split(',');
 
@@ -179,13 +196,17 @@ vizgrimoireControllers.controller('TopsWidgetCtrl', ['$scope', '$http', function
     dataTemp.top = top;
     dataTemp.activity = activityName;
 
-    //console.log(dataTemp);
+    $scope.loader.loading = false;
 
     $scope.tops = dataTemp;
   });
 }]);
 
 vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', function($scope, $http) {
+
+  $scope.loader = {
+    loading: true
+  };
 
   $scope.options = {
     chart: {
@@ -225,12 +246,18 @@ vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', 
       $scope.options.chart.height =320;
     };
 
+    $scope.loader.loading = false;
+
     $scope.horizBarsChartData = tempData;
 
   });
 }]);
 
 vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '$q', function($scope, $http, $q) {
+
+  $scope.loader = {
+    loading: true
+  };
 
   $scope.options = {
     chart: {
@@ -287,6 +314,8 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
         });
       }
 
+      $scope.loader.loading = false;
+
       $scope.stackedData = tempData;
     });
 
@@ -294,6 +323,10 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
 }]);
 
 vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q', function($scope, $http, $q){
+
+  $scope.loader = {
+    loading: true
+  };
 
   $scope.options = {
     chart: {
@@ -343,9 +376,6 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
       ageSeries[seriesIndex].value = ageSeries[seriesIndex].value + 1;
     };
 
-    //console.log('b :'+ birthSeries);
-    //console.log('a :'+ageSeries);
-
     var dataTemp = [
       {
         key: 'Engaged',
@@ -357,6 +387,8 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
       }
     ];
 
+    $scope.loader.loading = false;
+    
     $scope.demographicData = dataTemp;
 
   });

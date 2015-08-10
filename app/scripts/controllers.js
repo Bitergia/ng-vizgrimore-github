@@ -277,7 +277,8 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
         tickFormat: function(d){
           return d3.format(',.0f')(d);
         }
-      }
+      },
+      controlOptions: ['Stacked', 'Expanded']
     }
   };
 
@@ -388,7 +389,7 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
     ];
 
     $scope.loader.loading = false;
-    
+
     $scope.demographicData = dataTemp;
 
   });

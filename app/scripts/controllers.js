@@ -102,13 +102,16 @@ vizgrimoireControllers.controller('MetricsTrendsCtrl', ['$scope', '$http', funct
         total: data[metricsArray[i]],
         diff365: data['diff_net'+metricsArray[i]+'_365'],
         percentage365: data['percentage_'+metricsArray[i]+'_365'],
-        color365: function(x){if (x > 0){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_365']),
+        trend365: function(x){if (x > 0){return 'up';}else if (x<0){return 'down';} else {return 'right';}}(data['diff_net'+metricsArray[i]+'_365']),
+        color365: function(x){if (x > 0){return 'green';}else if (x<0){return 'red';} else {return 'black';}}(data['diff_net'+metricsArray[i]+'_365']),
         diff30: data['diff_net'+metricsArray[i]+'_30'],
         percentage30: data['percentage_'+metricsArray[i]+'_30'],
-        color30: function(x){if (x > 0){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_30']),
+        trend30: function(x){if (x > 0){return 'up';}else if (x<0){return 'down';} else {return 'right';}}(data['diff_net'+metricsArray[i]+'_30']),
+        color30: function(x){if (x > 0){return 'green';}else if (x<0){return 'red';} else {return 'black';}}(data['diff_net'+metricsArray[i]+'_30']),
         diff7: data['diff_net'+metricsArray[i]+'_7'],
         percentage7: data['percentage_'+metricsArray[i]+'_7'],
-        color7: function(x){if (x > 0){return 'green';}else{return 'red';}}(data['diff_net'+metricsArray[i]+'_7']),
+        trend7: function(x){if (x > 0){return 'up';}else if (x<0){return 'down';} else {return 'right';}}(data['diff_net'+metricsArray[i]+'_7']),
+        color7: function(x){if (x > 0){return 'green';}else if (x<0){return 'red';} else {return 'black';}}(data['diff_net'+metricsArray[i]+'_7'])
         });
     }
 
@@ -241,9 +244,9 @@ vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', 
     }
 
     if (tempData[0].values.length > 10) {
-      $scope.options.chart.height = 600;
+      $scope.options.chart.height = 800;
     } else {
-      $scope.options.chart.height =320;
+      $scope.options.chart.height =420;
     };
 
     $scope.loader.loading = false;
@@ -290,15 +293,18 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
     var keys = [];
     var jsonRequests = [];
 
-    for (var i = 0; i < data.name.length; i++) {
-      keys.push(data.name[i]);
-      jsonRequests.push($http.get('data/'+data.name[i]+'-scm-dom-evolutionary.json'));
-    }
-
     if (data.name.length > 10) {
-      $scope.options.chart.height = 600;
+      $scope.options.chart.height = 400;
+      for (var i = 0; i < 9; i++) {
+        keys.push(data.name[i]);
+        jsonRequests.push($http.get('data/'+data.name[i]+'-scm-dom-evolutionary.json'));
+      }
     } else {
       $scope.options.chart.height = 320;
+      for (var i = 0; i < data.name.length; i++) {
+        keys.push(data.name[i]);
+        jsonRequests.push($http.get('data/'+data.name[i]+'-scm-dom-evolutionary.json'));
+      }
     };
 
     $q.all(jsonRequests).then(function(results){

@@ -7,7 +7,7 @@
     "angular-route": "~1.4.2",
     "fontawesome": "~4.3.0",
     "bootstrap-css-only": "~3.3.4",
-    "angular-nvd3": "1.0.0-rc.2"
+    "angular-nvd3": "~1.0.5"
   },
   "devDependencies": {
     "chai": "~3.0.0",

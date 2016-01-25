@@ -29,6 +29,10 @@ app.config(['$routeProvider', function($routeProvider){
     '/scr', {
       templateUrl: 'templates/scrOverview.html'
     }
+  ).when(
+    '/about', {
+      templateUrl: 'templates/about.html'
+    }
   ).otherwise({
     templateUrl: 'templates/404.html'
   });

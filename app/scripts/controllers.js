@@ -283,7 +283,7 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
       controlOptions: ['Stacked', 'Expanded'],
       interactiveLayer: {
         tooltip: {
-          headerFormatter: function (d) { return d }
+          headerFormatter: function (d) { return d3.time.format('%b-%Y')(new Date(d*1000)) }
         }
       },
       legend: {

@@ -1,4 +1,6 @@
 <div ng-controller="DemographyChartCtrl">
   <div ng-show="loader.loading" style="text-align: center; color: #eee;"><i class="fa fa-2x fa-spinner fa-spin"></i></div>
+  <button ng-click="shareChart()" class="btn btn-xs sharing-chart-btn"><i class="fa fa-share"></i></button>
+  <button ng-click="showInfo()" class="btn btn-xs"><i class="fa fa-info"></i></button>
   <nvd3 options="options" data="demographicData"></nvd3>
 </div>

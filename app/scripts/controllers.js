@@ -15,10 +15,13 @@ vizgrimoireControllers.controller('ProjectNameCtrl', ['$scope', '$http', functio
   $http.get('data/scm-static.json').success(function(data){
     var repo = data.url.substring(19).split('/');
 
+    var dashboardUrl = ('http://'+location.hostname+':'+location.port+location.pathname).replace('share.html','');
+
     $scope.projectName = {
       owner: repo[0],
       repository: repo[1].substring(0, repo[1].length-4),
-      lastUpdate: data.last_date
+      lastUpdate: data.last_date,
+      dashboard: dashboardUrl
     };
 
   });
@@ -36,6 +39,15 @@ vizgrimoireControllers.controller('SharingCtrl', ['$scope', function($scope) {
 }]);
 
 vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', function ($scope, $http){
+
+  $scope.shareChart = function() {
+    var url = '<iframe width="600" height="400" style="border: none;" src="http://'+location.hostname+':'+location.port+location.pathname+'share.html#/chart/timeseries/'+$scope.datasource+'?metrics='+$scope.metrics+'"></iframe>'
+    window.prompt('Copy to clipboard: CTRL+C / CMD+C, Enter', url);
+  };
+
+  $scope.showInfo = function() {
+    window.alert($scope.metrics+' each month');
+  };
 
   $scope.loader = {
     loading: true
@@ -259,6 +271,15 @@ vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', 
 
 vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '$q', function($scope, $http, $q) {
 
+  $scope.shareChart = function() {
+    var url = '<iframe width="600" height="400" style="border: none;" src="http://'+location.hostname+':'+location.port+location.pathname+'share.html#/chart/stackedarea/'+$scope.datasource+'?metrics='+$scope.metrics+'"></iframe>'
+    window.prompt('Copy to clipboard: CTRL+C / CMD+C, Enter', url);
+  };
+
+  $scope.showInfo = function() {
+    window.alert($scope.metrics+' by most active domains each month');
+  };
+
   $scope.loader = {
     loading: true
   };
@@ -338,6 +359,15 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
 
 vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q', function($scope, $http, $q){
 
+  $scope.shareChart = function() {
+    var url = '<iframe width="600" height="400" style="border: none;" src="http://'+location.hostname+':'+location.port+location.pathname+'share.html#/chart/demography/'+$scope.datasource+'?metrics='+$scope.metrics+'"></iframe>'
+    window.prompt('Copy to clipboard: CTRL+C / CMD+C, Enter', url);
+  };
+
+  $scope.showInfo = function() {
+    window.alert('Contributors engaged each 6 months and contributors still active during last 6 months from that period');
+  };
+
   $scope.loader = {
     loading: true
   };
@@ -406,6 +436,14 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
     $scope.demographicData = dataTemp;
 
   });
+
+}]);
+
+vizgrimoireControllers.controller('shareChartCtrl', ['$scope', '$http', '$q', '$routeParams', function($scope, $http, $q, $routeParams){
+
+  $scope.widget = $routeParams.widget;
+  $scope.datasource = $routeParams.datasource;
+  $scope.metrics = $routeParams.metrics;
 
 }]);
 

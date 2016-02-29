@@ -38,7 +38,7 @@ vizgrimoireControllers.controller('SharingCtrl', ['$scope', function($scope) {
   };
 }]);
 
-vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', function ($scope, $http){
+vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', '$element', function ($scope, $http, $element){
 
   $scope.shareChart = function() {
     var url = '<iframe width="600" height="400" style="border: none;" src="http://'+location.hostname+':'+location.port+location.pathname+'share.html#/chart/timeseries/'+$scope.datasource+'?metrics='+$scope.metrics+'"></iframe>'
@@ -47,6 +47,10 @@ vizgrimoireControllers.controller('TimeseriesCtrl', ['$scope', '$http', function
 
   $scope.showInfo = function() {
     window.alert($scope.metrics+' each month');
+  };
+
+  $scope.saveChart = function() {
+    saveSvgAsPng($element.find('svg')[0], $scope.metrics+"-evolution.png", { backgroundColor: '#fff' });
   };
 
   $scope.loader = {
@@ -218,10 +222,14 @@ vizgrimoireControllers.controller('TopsWidgetCtrl', ['$scope', '$http', function
   });
 }]);
 
-vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', function($scope, $http) {
+vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', '$element', function($scope, $http, $element) {
 
   $scope.loader = {
     loading: true
+  };
+
+  $scope.saveChart = function() {
+    saveSvgAsPng($element.find('svg')[0], $scope.metrics+"-barschart.png", { backgroundColor: '#fff' });
   };
 
   $scope.options = {
@@ -269,7 +277,7 @@ vizgrimoireControllers.controller('HorizMultiBarChartCtrl', ['$scope', '$http', 
   });
 }]);
 
-vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '$q', function($scope, $http, $q) {
+vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '$q', '$element', function($scope, $http, $q, $element) {
 
   $scope.shareChart = function() {
     var url = '<iframe width="600" height="400" style="border: none;" src="http://'+location.hostname+':'+location.port+location.pathname+'share.html#/chart/stackedarea/'+$scope.datasource+'?metrics='+$scope.metrics+'"></iframe>'
@@ -278,6 +286,10 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
 
   $scope.showInfo = function() {
     window.alert($scope.metrics+' by most active domains each month');
+  };
+
+  $scope.saveChart = function() {
+    saveSvgAsPng($element.find('svg')[0], $scope.metrics+"-domains.png", { backgroundColor: '#fff' });
   };
 
   $scope.loader = {
@@ -357,7 +369,7 @@ vizgrimoireControllers.controller('StackedAreaWidgetCtrl', ['$scope', '$http', '
   });
 }]);
 
-vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q', function($scope, $http, $q){
+vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q', '$element', function($scope, $http, $q, $element){
 
   $scope.shareChart = function() {
     var url = '<iframe width="600" height="400" style="border: none;" src="http://'+location.hostname+':'+location.port+location.pathname+'share.html#/chart/demography/'+$scope.datasource+'?metrics='+$scope.metrics+'"></iframe>'
@@ -366,6 +378,10 @@ vizgrimoireControllers.controller('DemographyChartCtrl',['$scope', '$http', '$q'
 
   $scope.showInfo = function() {
     window.alert('Contributors engaged each 6 months and contributors still active during last 6 months from that period');
+  };
+
+  $scope.saveChart = function() {
+    saveSvgAsPng($element.find('svg')[0], "demography-chart.png", { backgroundColor: '#fff' });
   };
 
   $scope.loader = {

@@ -1,9 +1,10 @@
-#Angular VizGrimoire dashboard for GitHub data
+# Angular VizGrimoire dashboard for GitHub data
 
-_ng-vizgrimoire-github_ project is a rewritten from scratch version of current [VizGrimoireJS dashboard](https://github.com/VizGrimoire/VizGrimoireJS)
-to be used in [biterg.io](http://biterg.io) website.
+_ng-vizgrimoire-github_ project is a rewritten from scratch version of [VizGrimoireJS dashboard](https://github.com/VizGrimoire/VizGrimoireJS) to be used in [biterg.io](http://biterg.io) website (**not available anymore**).
 
-##Dependencies
+Since our visualization toolkit has move to Kibana, this project is considered deprecated.
+
+## Dependencies
 
 Currently the dashboard depends mainly on:
 
@@ -13,7 +14,7 @@ Currently the dashboard depends mainly on:
 
 Check [bower.json](https://github.com/Bitergia/ng-vizgrimore-github/blob/master/bower.json) file for detailed info.
 
-#How to install it
+# How to install it
 
 If you want use it as standalone dashboard, clone the repository and:
 
@@ -48,7 +49,7 @@ FIXME: `data` folder (by now) needs to be copied to `dist` folder to ensure data
 
 #How it works
 
-##VizGrimoire Widgets (AKA _vgwidets_)
+## VizGrimoire Widgets (AKA _vgwidets_)
 
 Main component for the dashboard are widgets used to represent data. They are defined as Angular directives in the html code:
 
@@ -73,7 +74,7 @@ Basically, you define:
 
 VGWidgets are placed as blocks in the html structure, and the will fit the available width. Usually vgwidet height is hardcoded fixed.
 
-###Some examples
+### Some examples
 
 To show a chart of source code authors evolution, current implementation is:
 
@@ -87,6 +88,6 @@ If you would like to see both authors and new authors, that would be:
 <vgwidet-timeseries widget-datasource="scm" widget-metrics="authors,newauthors"></vgwidet>
 ```
 
-#TODO
+# TODO
 
 There are a lot of things to do and that could be improved, so, test it, paly with it and submit pull requests if you find it interesting...
